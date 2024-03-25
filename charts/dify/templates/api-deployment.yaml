@@ -58,16 +58,16 @@ spec:
           {{- toYaml .Values.api.extraEnv | nindent 8 }}
         {{- end }}
         {{- if and .Values.externalS3.enabled .Values.externalS3.existingSecret }}
-          S3_ACCESS_KEY:
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Values.externalS3.existingSecret }}
-                key: {{ .Values.externalS3.existingSecretAccessKey }}
-          S3_SECRET_KEY:
-            valueFrom:
-              secretKeyRef:
-                name: {{ .Values.externalS3.existingSecret }}
-                key: {{ .Values.externalS3.existingSecretSecretKey }}
+        - name: S3_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.externalS3.existingSecret }}
+              key: {{ .Values.externalS3.existingSecretAccessKey }}
+        - name: S3_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.externalS3.existingSecret }}
+              key: {{ .Values.externalS3.existingSecretSecretKey }}
         {{- end }}
         envFrom:
           - configMapRef:

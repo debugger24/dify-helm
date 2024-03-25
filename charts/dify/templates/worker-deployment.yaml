@@ -50,6 +50,18 @@ spec:
         {{- if .Values.worker.extraEnv }}
           {{- toYaml .Values.worker.extraEnv | nindent 8 }}
         {{- end }}
+        {{- if and .Values.externalS3.enabled .Values.externalS3.existingSecret }}
+        - name: S3_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.externalS3.existingSecret }}
+              key: {{ .Values.externalS3.existingSecretAccessKey }}
+        - name: S3_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.externalS3.existingSecret }}
+              key: {{ .Values.externalS3.existingSecretSecretKey }}
+        {{- end }}
         envFrom:
           - configMapRef:
               name: {{ template "dify.worker.fullname" . }}

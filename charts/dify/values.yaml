@@ -36,6 +36,10 @@ image:
 
 api:
   enabled: true
+
+  # Supported values are `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`
+  logLevel: INFO
+
   replicas: 1
   resources: {}
   nodeSelector: {}

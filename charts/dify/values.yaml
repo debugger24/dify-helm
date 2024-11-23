@@ -94,6 +94,7 @@ api:
   customReadinessProbe: {}
   ## @param api.customStartupProbe Custom startupProbe that overrides the default one
   customStartupProbe: {}
+  secretName: "" # Additional externally managed secret to be mounted in the api container
   extraEnv:
   # Apply your own Environment Variables if necessary.
   # Variable defined here takes higher priority than those from `ConfigMap` generated given `.Values`
